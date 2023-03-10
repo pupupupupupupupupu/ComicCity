@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Poppins:wght@300;400;500;600&family=Roboto+Mono&display=swap');
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+}
+.searchBar {
+  /* margin-left: -20%; */
+  /* margin-top: -3.7%; */
+  height: 100vh;
+  /* display: none; */
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  overflow: hidden;
+  /* background-color: #fff; */
+}
+.input-box {
+  position: relative;
+  height: 25px;
+  max-width: 30px;
+  width: 100%;
+  margin: 0 50px;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.input-box.open {
+  max-width: 250px;
+}
+.input-box input {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 0 15px;
+  /* outline: none; */
+  /* border: black; */
+  border-radius: 6px;
+  font-size: 8.5px;
+  font-weight: 400;
+  color: #333;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.input-box.open input {
+  padding: 0 95px 0 35px;
+  /* border: 2px #000000; */
+}
+.input-box .search {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 35px;
+  /* border: #000000; */
+  background-color: #000000;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.input-box.open .search {
+  border-radius: 6px 0 0 6px;
+}
+.search .search-icon {
+  font-size: 15px;
+  color: #ffffff;
+  transform: rotate(90deg);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.input-box.open .search-icon {
+  transform: rotate(0deg);
+}
+.input-box .close-icon {
+  position: absolute;
+  right: -45px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #000000;
+  padding: 25px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.input-box.open .close-icon {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+#navbar {
+  overflow: hidden;
+  display: flex;
+  padding: 0.5% 0% 0.5% 0%; 
+  background-color: rgb(255, 255, 255);
+}
+
+#logoContainer {
+  margin-top: 1%;
+  margin-left: 2%;
+  padding: 0.8%;
+}
+
+#logo {
+  display: flex;
+  left: 15%;
+  margin-top: -3%;
+  margin-left: 0%;
+  height: 13px;
+}
+
+
+#navCentreButtons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#newNavbar {
+  position: absolute;
+  left: 35%;
+  width: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visible{
+  width: 500;
+  margin-left: -15%;
+}
+
+.hidden{
+  width: 500;
+  margin-left: -15%;
+  display: none;
+}
+
+#navLeftButtons {
+  width: 100%;
+  margin-top: 1%;
+  /* margin-left: %; */
+}
+
+.mainDiv{
+  /* height: 25px; */
+  /* width: 35px; */
+}
+
+#navButton {
+  position: relative;
+  left: 10%;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-items: center; */
+  font-size: 2.2vh;
+  background-color: rgb(255, 255, 255);
+  border: white;
+}
+
+
+.newSearchButton {
+
+  /* background-color: #000000; */
+  position: absolute;
+  left: 40%;
+}
+
+#backgroundCarousel{
+  height: 294.8px;
+  width: 100%;
+  /* height: 294.8px;
+  width: 823.99px; */
+}
+
+.carousel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./extras/backgroundCarousel.png");
+  height: 294.8px;
+  width: 100%;
+}
+
+.carouselHere{
+  color: #fff;
+  display: flex;
+  /* justify-content: center; */
+  /* align-content: center; */
+  height: 245.66px;
+  width: 645.66px;
+  background-color: #000000;
+  font-family: 'Poppins', sans-serif;
+}
+
+.swiper{
+  display: flex;
+  /* top: 80%; */
+  align-items: center;
+  /* padding: 50px 20px; */
+  justify-content: center;
+  /* height: 60vh; */
+  width: 40vw;
+}
+SwiperSlide{
+  display: flex;
+  top: 30vh;
+}
