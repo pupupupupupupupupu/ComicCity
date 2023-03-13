@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import Navbar from "./components/navbar"
 import comicCity from "./extras/Comic City.png";
 import marsRed from "./extras/marsRed.png";
 import blueMoon from "./extras/vampireBlue.png";
@@ -30,11 +31,12 @@ function App() {
   return (
     <div className="App">
       <div id="navbar">
+        
         <div id="logoContainer">
-          <img src={comicCity} alt="logo" id="logo" />
+        <Navbar />
         </div>
 
-        <div id="navCentreButtons">
+        {/* <div id="navCentreButtons">
           <button className="newSearchButton" id="navButton">
             <Component />
           </button>
@@ -44,15 +46,21 @@ function App() {
             <button id="navButton">Comics</button>
             <button id="navButton">About Us</button>
           </div>
-        </div>
+        </div> */}
 
-        <div id="navLeftButtons">
+        {/* <div id="navLeftButtons">
           <button id="navButton">Sign In</button>
           <button id="navButton">Noti..</button>
-        </div>
+        </div> */}
+      </div>
+      <div>
+      <Carousel />
+      </div>
+      <div>
+        
+      <PopularComics />
       </div>
 
-      <Carousel />
     </div>
   );
 }
@@ -116,7 +124,7 @@ autoplay={{
 }}
 modules={[ Autoplay, Pagination, Navigation]}
       // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      // modules={[Navigation, Pagination, Scrollbar, A11y]}
       // spaceBetween={50}
       // slidesPerView={1}
       // autoplay={{
@@ -124,8 +132,8 @@ modules={[ Autoplay, Pagination, Navigation]}
       //   disableOnInteraction:false,
       // }}
       // navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
+      // pagination={{ clickable: true }}
+      // scrollbar={{ draggable: true }}
       // onSwiper={(swiper) => console.log(swiper)}
       // onSlideChange={() => console.log('slide change')}
       >
@@ -139,5 +147,63 @@ modules={[ Autoplay, Pagination, Navigation]}
       </div>
   );
 };
+
+
+const PopularComics = () => {
+  return (
+    <div className="popularComics">
+      <div className="header">
+          <h1>Popular This Week</h1>
+      </div>
+
+      <div id="template">
+
+          <div className="comic">
+            <img src="#" alt="imgOne" />
+            
+            <div className="contents">
+              <h3>Tian Guan Ci Fu</h3>
+              <p>Author's Name</p>
+              <p>Genre</p>
+            </div>
+          </div>
+
+          <div className="comic">
+            <img src="#" alt="imgOne" />
+            
+            <div className="contents">
+              <h3>Tian Guan Ci Fu</h3>
+              <p>Author's Name</p>
+              <p>Genre</p>
+            </div>
+
+          </div>
+
+          <div className="comic">
+            <img src="#" alt="imgOne" />
+            
+            <div className="contents">
+              <h3>Tian Guan Ci Fu</h3>
+              <p>Author's Name</p>
+              <p>Genre</p>
+            </div>
+          </div>
+
+          <div className="comic">
+            <img src="#" alt="imgOne" />
+            
+            <div className="contents">
+              <h3>Tian Guan Ci Fu</h3>
+              <p>Author's Name</p>
+              <p>Genre</p>
+            </div>
+          </div>
+          
+      </div>
+
+    </div>
+  )
+}
+
 
 export default App;

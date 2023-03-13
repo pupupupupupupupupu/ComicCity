@@ -108,6 +108,7 @@ body {
 
 #logoContainer {
   margin-top: 1%;
+  margin-bottom: 1%;
   margin-left: 2%;
   padding: 0.8%;
 }
@@ -217,4 +218,56 @@ body {
 SwiperSlide{
   display: flex;
   top: 30vh;
+}
+
+
+.popularComics{
+  padding: 1.5%;
+}
+
+.header{
+  margin-bottom: 2%;
+}
+
+.comic{
+  margin-bottom: 1%;
+  margin-left: 3%;
+  /* background-color: #1db2d3; */
+  background-color: #ffffff;
+  height: 50vh;
+  width: 290px;
+  align-items: center;
+  justify-content:space-around;
+  display: flex;
+  flex-direction: column;
+}
+
+.comic img{
+  color: #fff;
+  background-color: #000000;
+  box-sizing: border-box;
+  padding: 2px;
+  height: 277px;
+  width: 224px;
+}
+
+.contents {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  left: -15%;
+}
+
+#template{
+  display: flex;
+}
+
+@media only screen and (max-width: 800px) {
+  #template{
+      flex-direction: column;
+      transition: all 0.5s ease;
+      justify-content: center;
+      align-items: center;
+  }
 }
