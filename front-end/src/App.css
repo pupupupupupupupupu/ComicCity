@@ -189,8 +189,7 @@ SwiperSlide {
 .history {
   display: flex;
   padding: 2%;
-  /* color: #fff; */
-  color: #000000;
+   color: #000000;
   /* background-color: #000000; */
   /* background-color: #ffffff; */
   margin-bottom: 1%;
