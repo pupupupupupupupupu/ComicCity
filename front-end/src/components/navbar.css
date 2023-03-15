@@ -90,7 +90,6 @@ header{
     color: var(--main-color);
 }
 #menu-icon{
-    /* height: 1.2rem; */
     font-size: 35px;
     color: var(--text-color);
     cursor: pointer;
@@ -107,29 +106,17 @@ header{
     header{
         padding: 14px 2%;
         transition: 0.2s;
-        transition: all 0.5s ease;
-
     }
 
     .navbar{
         padding: 5px 0;
         margin: 0px 20px;
-        transition: all 0.5s ease;
-
     }
 }
 
 @media (max-width: 1090px){
     #menu-icon{
-        transition: all 0.5s ease;
-
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        box-sizing: border-box;
-        /* height: 30px; */
-        width: 30px;
-        /* display: block; */
+        display: block;
     }
     .navbar{
         position: absolute;
@@ -156,47 +143,8 @@ header{
     }    
     .navbar div.active{
         color: var(--text-color);
-        transition: all 0.5s ease;
-
     }
     .navbar.open{
         right: 2%;
-        transition: all 0.5s ease;
-
     }
-}
-
-@media (max-width:595px) {
-    header{
-        display: flex;
-        box-sizing: border-box;
-        justify-content: space-between;
-        padding: 5px 30px;
-        transition: all 0.5s ease;
-
-        /* flex-direction: column; */
-    }
-
-    #logoImage{
-        transition: all 0.5s ease;
-
-        /* height: 2rem; */
-        /* margin-bottom: 1%; */
-    }
-
-    .user{
-        display: none;
-    }
-
-    .register{
-        display: none;
-    }
-
-    .navbar{
-        display: none;
-    }
-
-
-
-
 }

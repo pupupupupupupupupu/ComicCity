@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import Footer from './components/footer'
-// import Navbar from './components/navbar'
-// import HomePage from './components/home';
+import Footer from './components/footer'
+import Navbar from './components/navbar'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-    {/* <HomePage /> */}
     {/* <Navbar /> */}
     {/* <Footer /> */}
   </React.StrictMode>

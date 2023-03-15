@@ -70,19 +70,13 @@ body{
     .footer{
         display: flex;
         flex-direction: column;
-        transition: all 0.5s ease;
-
     }
 
     #footerLogo{
         height: 3rem;
-        transition: all 0.5s ease;
-
     }    
 
     .horizontalRule{
         display: none;
-        transition: all 0.5s ease;
-
     }
 }
