@@ -15,7 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
-import MenuIcon from "@mui/icons-material/Menu";
+
 
 const Navbar = () => {
   // const menu = document.getElementById("menu-icon");
@@ -80,8 +80,14 @@ const Navbar = () => {
     </Box>
   );
 
+<<<<<<< HEAD
   return (
     <div className="mainNavbar">
+=======
+  return (    
+    <div>
+
+>>>>>>> cf3859b2968f92034f405f5d65bde90e664cb428
       <header>
         <div className="logo">
           <img src={Logo} alt="Logo" id="logoImage" />
@@ -109,33 +115,28 @@ const Navbar = () => {
 
         <div className="main">
           <div className="user">
-            <i className="bx bxs-user"></i>Sign In
+            <i class="bx bxs-user"></i>Sign In
           </div>
-
-          <div className="register">Register</div>
-
+          <div>Register</div>
           <div
             // className="bx bx-menu"
             // onClick={handleClick}
             id="menu-icon"
           >
-            <div className="menu">
-              <React.Fragment key={"right"}>
-                <Button onClick={toggleDrawer("right", true)}>
-                  <MenuIcon />
-                </Button>
-
-                {/* theme provider inorder to display dark theme */}
-
-                <SwipeableDrawer
-                  anchor={"right"}
-                  open={state["right"]}
-                  onClose={toggleDrawer("right", false)}
-                  onOpen={toggleDrawer("right", true)}
-                >
-                  {list("right")}
-                </SwipeableDrawer>
-              </React.Fragment>
+            <div>
+              {["right"].map((anchor) => (
+                <React.Fragment key={anchor}>
+                  <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                  <SwipeableDrawer
+                    anchor={anchor}
+                    open={state[anchor]}
+                    onClose={toggleDrawer(anchor, false)}
+                    onOpen={toggleDrawer(anchor, true)}
+                  >
+                    {list(anchor)}
+                  </SwipeableDrawer>
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>
