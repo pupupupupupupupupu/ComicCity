@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
+// import AboutUs from './components/aboutUs'
+import Comics from './components/comics'
 import reportWebVitals from './reportWebVitals';
 // import Footer from './components/footer'
 // import Navbar from './components/navbar'
@@ -10,7 +12,9 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Comics />
+    {/* <AboutUs /> */}
+    {/* <App /> */}
     {/* <HomePage /> */}
     {/* <Navbar /> */}
     {/* <Footer /> */}
