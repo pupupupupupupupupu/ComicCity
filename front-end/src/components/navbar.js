@@ -53,7 +53,7 @@ const Navbar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {["Home", "Upload", "Comics", "About Us"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -66,7 +66,7 @@ const Navbar = () => {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
+        {["Sign In", "Register"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -80,9 +80,14 @@ const Navbar = () => {
     </Box>
   );
 
+<<<<<<< HEAD
+  return (
+    <div className="mainNavbar">
+=======
   return (    
     <div>
 
+>>>>>>> cf3859b2968f92034f405f5d65bde90e664cb428
       <header>
         <div className="logo">
           <img src={Logo} alt="Logo" id="logoImage" />
