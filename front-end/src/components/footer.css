@@ -1,75 +1,73 @@
-
-.footer{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    max-width: 100%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content:space-evenly;
-    height: 30vh;
-    background-color: #8284C2;
+.footer {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 30vh;
+  background-color: #8284c2;
 }
 
-#footerLogo{
-    height: 2.3rem;
+#footerLogo {
+  height: 2.3rem;
 }
 
-.horizontalRule{
-    display: flex;
-    flex-direction: row;
-    color: aliceblue;
-    height: 10rem;
-    width: 0px;
+.horizontalRule {
+  display: flex;
+  flex-direction: row;
+  color: aliceblue;
+  height: 10rem;
+  width: 0px;
 }
 
-.footerLines{
-    font-size: 1.2rem;
-    margin-bottom: 5%;
+.footerLines {
+  font-size: 1.2rem;
+  margin-bottom: 5%;
 }
 
-.footerMiniLogos{
-    display: flex;
-    justify-content: space-evenly;
+.footerMiniLogos {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.footerMiniLogos img{
-    height: 2.3rem;
-    display: flex;
-    justify-content: space-evenly;
+.footerMiniLogos img {
+  height: 2.3rem;
+  display: flex;
+  justify-content: space-evenly;
 }
-
 
 @media (max-width: 730px) {
-    #footerLogo{
-        padding: 6px;
-        transition: all 0.5s ease;
-    }  
-    
-    .footerContent{
-        box-sizing: border-box;
-        padding: 6px;
-        transition: all 0.5s ease;
-    }
+  #footerLogo {
+    padding: 6px;
+    transition: all 0.5s ease;
+  }
 
-    .footerLines{
-        font-size: medium;
-        transition: all 0.5s ease;
-    }
+  .footerContent {
+    box-sizing: border-box;
+    padding: 6px;
+    transition: all 0.5s ease;
+  }
+
+  .footerLines {
+    font-size: medium;
+    transition: all 0.5s ease;
+  }
 }
 
-@media (max-width:595px) {
-    .footer{
-        display: flex;
-        flex-direction: column;
-    }
+@media (max-width: 595px) {
+  .footer {
+    display: flex;
+    flex-direction: column;
+  }
 
-    #footerLogo{
-        height: 3rem;
-    }    
+  #footerLogo {
+    height: 3rem;
+  }
 
-    .horizontalRule{
-        display: none;
-    }
+  .horizontalRule {
+    display: none;
+  }
 }
