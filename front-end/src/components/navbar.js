@@ -1,7 +1,6 @@
 // import React from "react";
 import "./navbar.css";
 import Logo from "../extras/Comic City.png";
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -15,24 +14,21 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
-
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
   // const menu = document.getElementById("menu-icon");
   // const navbar = document.querySelector(".navbar");
-
   // const handleClick = () => {
   //   menu.classList.toggle("bx-x");
   //   navbar.classList.toggle("open");
   // };
-
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -41,10 +37,8 @@ const Navbar = () => {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
@@ -53,16 +47,18 @@ const Navbar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Upload", "Comics", "About Us"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {["Search", "Home", "Upload", "Comics", "About Us"].map(
+          (text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          )
+        )}
       </List>
       <Divider />
       <List>
@@ -80,21 +76,14 @@ const Navbar = () => {
     </Box>
   );
 
-<<<<<<< HEAD
   return (
-    <div className="mainNavbar">
-=======
-  return (    
     <div>
-
->>>>>>> cf3859b2968f92034f405f5d65bde90e664cb428
       <header>
         <div className="logo">
           <img src={Logo} alt="Logo" id="logoImage" />
           {/* <i className="bx bxs-home-smile"></i>
           <span>Logo</span> */}
         </div>
-
         <ul className="navbar">
           <li>
             <div>Search</div>
@@ -115,15 +104,36 @@ const Navbar = () => {
 
         <div className="main">
           <div className="user">
-            <i class="bx bxs-user"></i>Sign In
+            <i className="bx bxs-user"></i>Sign In
+            {/* <i class="bx bxs-user"></i>Sign In */}
           </div>
-          <div>Register</div>
+
+          <div className="register">Register</div>
+
+          {/* <div>Register</div> */}
           <div
             // className="bx bx-menu"
             // onClick={handleClick}
             id="menu-icon"
           >
-            <div>
+            <div className="menu">
+              <React.Fragment key={"right"}>
+                <Button onClick={toggleDrawer("right", true)}>
+                  <MenuIcon />
+                </Button>
+
+                {/* theme provider inorder to display dark theme */}
+
+                <SwipeableDrawer
+                  anchor={"right"}
+                  open={state["right"]}
+                  onClose={toggleDrawer("right", false)}
+                  onOpen={toggleDrawer("right", true)}
+                >
+                  {list("right")}
+                </SwipeableDrawer>
+              </React.Fragment>
+              {/* <div>
               {["right"].map((anchor) => (
                 <React.Fragment key={anchor}>
                   <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
@@ -137,6 +147,7 @@ const Navbar = () => {
                   </SwipeableDrawer>
                 </React.Fragment>
               ))}
+            </div> */}
             </div>
           </div>
         </div>
@@ -144,5 +155,4 @@ const Navbar = () => {
     </div>
   );
 };
-
 export default Navbar;
