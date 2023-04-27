@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 import Footer from "./footer";
 import AboutUsLogo from "../extras/ComicCityAboutUs.png";
 
-const aboutUs = () => {
+const AboutUs = () => {
   return (
     <div className="aboutUs">
       <Navbar />
@@ -40,4 +40,4 @@ const aboutUs = () => {
   );
 };
 
-export default aboutUs;
+export default AboutUs;
