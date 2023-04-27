@@ -3,22 +3,29 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 // import App from './App';
 // import AboutUs from './components/aboutUs'
-import Comics from "./components/comics";
+// import Comics from "./components/comics";
 import reportWebVitals from "./reportWebVitals";
 // import Footer from './components/footer'
 // import Navbar from './components/navbar'
-// import HomePage from './components/home';
+import HomePage from "./components/home";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Comics />
-    {/* <AboutUs /> */}
-    {/* <App /> */}
-    {/* <HomePage /> */}
-    {/* <Navbar /> */}
-    {/* <Footer /> */}
-  </React.StrictMode>
+  <Auth0Provider
+    domain={process.env.REACT_APP_AUTH0_DOMAIN}
+    clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+    authorizationParams={{ redirect_uri: window.location.origin }}
+  >
+    <React.StrictMode>
+      {/* <Comics /> */}
+      {/* <AboutUs /> */}
+      {/* <App /> */}
+      <HomePage />
+      {/* <Navbar /> */}
+      {/* <Footer /> */}
+    </React.StrictMode>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -13,16 +13,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-
 import MenuIcon from "@mui/icons-material/Menu";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-  // const menu = document.getElementById("menu-icon");
-  // const navbar = document.querySelector(".navbar");
-  // const handleClick = () => {
-  //   menu.classList.toggle("bx-x");
-  //   navbar.classList.toggle("open");
-  // };
+  const { loginWithRedirect, user, logout, loginWithPopup } = useAuth0();
+  console.log(user);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -103,12 +99,20 @@ const Navbar = () => {
         </ul>
 
         <div className="main">
-          <div className="user">
-            <i className="bx bxs-user"></i>Sign In
+          <div className="user" onClick={() => loginWithPopup()}>
+            <i className="bx bxs-user"></i>
+            {user ? user.given_name : "Sign in"}
             {/* <i class="bx bxs-user"></i>Sign In */}
           </div>
 
-          <div className="register">Register</div>
+          <div
+            className="register"
+            onClick={() => {
+              user ? logout() : loginWithPopup();
+            }}
+          >
+            {user ? "Logout" : "Register"}
+          </div>
 
           {/* <div>Register</div> */}
           <div
@@ -119,7 +123,7 @@ const Navbar = () => {
             <div className="menu">
               <React.Fragment key={"right"}>
                 <Button onClick={toggleDrawer("right", true)}>
-                  <MenuIcon />
+                  <MenuIcon onClick={toggleDrawer("right", true)} />
                 </Button>
 
                 {/* theme provider inorder to display dark theme */}
