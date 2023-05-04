@@ -1,0 +1,20 @@
+
+
+.formData{
+    transform: translateY(10rem);
+}
+
+.uploadForm{
+    display: flex;
+    justify-content: center;
+}
+
+.checkboxes{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.coverContainer{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}

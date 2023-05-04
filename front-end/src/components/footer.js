@@ -6,7 +6,7 @@ import github from "../extras/Github - Original.png";
 import instagram from "../extras/Instagram - Original.png";
 import linkedIn from "../extras/LinkedIn - Original.png";
 
-const footer = () => {
+const Footer = () => {
   return (
     <div className="footer">
       <img src={footerLogo} alt="footerLogo" id="footerLogo" />
@@ -35,4 +35,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;

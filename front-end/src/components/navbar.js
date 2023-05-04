@@ -15,6 +15,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
   const { loginWithRedirect, user, logout, loginWithPopup } = useAuth0();
@@ -84,18 +86,26 @@ const Navbar = () => {
           <li>
             <div>Search</div>
           </li>
-          <li>
-            <div className="active">Home</div>
-          </li>
-          <li>
-            <div>Upload</div>
-          </li>
-          <li>
-            <div>Comics</div>
-          </li>
-          <li>
-            <div>About Us</div>
-          </li>
+          <Link to="/">
+            <li>
+              <div className="active">Home</div>
+            </li>
+          </Link>
+          <Link to="/upload">
+            <li>
+              <div>Upload</div>
+            </li>
+          </Link>
+          <Link to="/comics">
+            <li>
+              <div>Comics</div>
+            </li>
+          </Link>
+          <Link to="/aboutus">
+            <li>
+              <div>About Us</div>
+            </li>
+          </Link>
         </ul>
 
         <div className="main">

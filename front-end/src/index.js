@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import App from './App';
-// import AboutUs from './components/aboutUs'
-// import Comics from "./components/comics";
 import reportWebVitals from "./reportWebVitals";
-// import Footer from './components/footer'
-// import Navbar from './components/navbar'
-import HomePage from "./components/home";
+import App from './App';
+
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -21,7 +17,9 @@ root.render(
       {/* <Comics /> */}
       {/* <AboutUs /> */}
       {/* <App /> */}
-      <HomePage />
+      {/* <HomePage /> */}
+      {/* <Upload /> */}
+      <App />
       {/* <Navbar /> */}
       {/* <Footer /> */}
     </React.StrictMode>

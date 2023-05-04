@@ -7,7 +7,7 @@ import AboutUsLogo from "../extras/ComicCityAboutUs.png";
 const AboutUs = () => {
   return (
     <div className="aboutUs">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="aboutUsSection">
         <div className="aboutUsHeading">
@@ -32,10 +32,10 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-
+{/* 
       <footer>
         <Footer />
-      </footer>
+      </footer> */}
     </div>
   );
 };

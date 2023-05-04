@@ -52,40 +52,98 @@
 //     });
 //   });
 
-const fs = require("fs");
+
+// const mongoose = require("mongoose");
+// const dotenv = require("dotenv");
+
+// dotenv.config({ path: "./config.env" });
+
+// const DB = process.env.DATABASE.replace(
+//   "<PASSWORD>",
+//   process.env.DATABASE_PASSWORD
+// );
+
+// mongoose
+//   .connect(DB, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("DB connection successful");
+//   });
+
+// const mangaSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: [true, "A name is required"],
+//     unique: true,
+//   },
+//   rating: {
+//     type: Number,
+//     default: 3,
+//   },
+//   chapter: {
+//     type: Number
+//     // required: [true, "Number of chapter(s) is/are required"],
+//   }
+// });
+
+// const Manga = mongoose.model("Manga", mangaSchema);
+
+// const testManga = new Manga({
+//   name: "Ayush Shrivastava",
+//   price: 3,
+// });
+
+// testManga
+//   .save()
+//   .then((doc) => {
+//     console.log(doc);
+//   })
+//   .catch((err) => {
+//     console.log("ERROR 💥:", err);
+//   });
+
+// const port = process.env.PORT || 3000;
+
+
+const dotenv = require("dotenv");
 const express = require("express");
+const mongoose = require("mongoose");
 
+const comicRoutes = require("./router/comicRouter")
+
+//express app
 const app = express();
+dotenv.config({path: "./config.env"})
 
+
+//middleware
 app.use(express.json());
 
-const comicData = JSON.parse(fs.readFileSync("./data/website-data.json"));
 
-app.get("/api/v1/comicData", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: { comicData: comicData },
+app.use((req, rs, next) => {
+  console.log(req.path, req.method);
+  next();
+});
+
+
+//routes
+app.use("/api/comics", comicRoutes);
+
+
+//connect to database
+mongoose.connect(process.env.DATABASE)
+  .then(() => {
+
+    //listening to port
+    app.listen(process.env.PORT, () => {
+      console.log("Listening on port", process.env.PORT)
+    })
+
+  })
+  .catch((error) => {
+    console.log(error)
   });
-});
-
-app.post("/api/v1/comicData", (req, res) => {
-  // console.log(req.body);
-
-  const newId = comicData[comicData.length - 1].id + 1;
-  const newTour = Object.assign({ id: newId }, req.body);
-
-  comicData.push(newTour);
-  fs.writeFile("./data/website-data.json", JSON.stringify(comicData), (err) => {
-    res.status(201).json({
-      status: "success",
-      data: {
-        name: newTour,
-      },
-    });
-  });
-});
-
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}...`);
-});
