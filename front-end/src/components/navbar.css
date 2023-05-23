@@ -16,18 +16,20 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
 }
+.navBody{
+  position: relative;
+}
+
 header {
+  box-sizing: border-box;
   background-color: var(--bg-color);
   position: fixed;
   min-width: 100%;
-  /* width: 100%; */
-  /* top: 0;
-    right: 0; */
-  z-index: 1000;
+
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background: transparent; */
   padding: 20px 3% 5px 3%;
   transition: all 0.5s ease;
 }
@@ -62,9 +64,7 @@ header {
 .navbar div:hover {
   color: var(--main-color);
 }
-.navbar div.active {
-  color: var(--main-color);
-}
+
 .main {
   display: flex;
   align-items: center;
@@ -112,36 +112,28 @@ header {
 }
 
 @media (max-width: 1090px) {
-  #menu-icon {
+  .navBody{
+
+    box-sizing: border-box;
+  }
+  .logo img{
+
+    height: 0.75rem;
     transition: all 0.5s ease;
 
-    align-items: center;
-    display: flex;
-    justify-content: center;
+  }
+
+  header{
+    justify-content: space-evenly;
+
     box-sizing: border-box;
-    /* height: 30px; */
-    width: 30px;
-    /* display: block; */
-    display: block;
   }
-  .navbar {
-    position: absolute;
-    top: 100%;
-    right: -100%;
-    width: 270px;
-    height: 31vh;
-    background: var(--main-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 10px;
-    transition: all 0.5s ease;
-  }
+
+ 
   .navbar div {
-    display: block;
-    margin: 12px 0;
-    padding: 0px 25px;
+    font-size: 0.65rem;
     transition: all 0.5s ease;
+ 
   }
   .navbar div:hover {
     color: var(--text-color);
@@ -151,9 +143,13 @@ header {
     color: var(--text-color);
     transition: all 0.5s ease;
   }
-  .navbar.open {
-    right: 2%;
+
+
+
+  .main div{
     transition: all 0.5s ease;
+
+    font-size: 0.65rem;
   }
 }
 
@@ -161,7 +157,7 @@ header {
   header {
     display: flex;
     box-sizing: border-box;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 15px 30px;
     transition: all 0.5s ease;
 
@@ -170,20 +166,22 @@ header {
 
   #logoImage {
     transition: all 0.5s ease;
-
-    /* height: 2rem; */
-    /* margin-bottom: 1%; */
+  }
+  .logo img {
+    height: 0.65rem;
   }
 
-  .user {
-    display: none;
+
+  .navbar div {
+    font-size: 0.55rem;
+    transition: all 0.5s ease;
+ 
   }
 
-  .register {
-    display: none;
-  }
 
-  .navbar {
-    display: none;
+  .main div{
+    transition: all 0.5s ease;
+
+    font-size: 0.55rem;
   }
 }

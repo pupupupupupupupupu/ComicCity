@@ -1,17 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import "./home.css";
-import Navbar from "./navbar";
-import Footer from "./footer";
-// import comicCity from "./extras/Comic City.png";
 import marsRed from "../extras/marsRed.png";
 import blueMoon from "../extras/vampireBlue.png";
 import mushoku from "../extras/mushokuTensei.png";
 import noblesse from "../extras/Noblesse.png";
-import TianGuanCiFu from "../extras/TianGuanCiFu.png";
-import NanoMachine from "../extras/NanoMachine.png";
-import SwordSage from "../extras/SowrdSage.png";
-import SwordKing from "../extras/SwordKing.png";
-// import footerLogo from "./extras/ComicCityFooter.png"
+
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Autoplay } from "swiper";
@@ -29,7 +23,6 @@ import "swiper/css/effect-coverflow";
 function HomePage() {
   return (
     <>
-      {/* <Navbar /> */}
       <div className="App">
         <div id="navbar">
           <div id="logoContainer"></div>
@@ -41,14 +34,7 @@ function HomePage() {
         <div>
           <PopularComics />
         </div>
-        <div>
-          <LastRead />
-        </div>
       </div>
-
-      {/* <footer>
-        <Footer />
-      </footer> */}
     </>
   );
 }
@@ -112,6 +98,30 @@ const Carousel = () => {
 };
 
 const PopularComics = () => {
+
+  const { id } = useParams();
+  const [popular, setPopular] = useState(null);
+
+  useEffect(() => {
+    const fetchComic = async () => {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/comics`);
+      const json = await response.json();
+
+      if (response.ok) {
+        setPopular(json);
+        console.log(json);
+        console.log("This is Comic Data:", popular);
+        
+      }
+    };
+
+    fetchComic();
+  });
+
+  if (!popular) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="popularComics">
       <div className="header">
@@ -119,106 +129,25 @@ const PopularComics = () => {
       </div>
 
       <div id="template">
-        <div className="comic">
-          <img src={TianGuanCiFu} alt="TianGuanCiFu" />
+          {popular.map((popularComic) => (
+                  <Link to={`/comics/${popularComic._id}`}>
+                    <div key={popularComic._id} className="comic">
+                      <img key={popularComic._id} src={popularComic.coverImage} alt={popularComic.comicName} />
 
-          <div className="contents">
-            <div className="contentsHeader">
-              <h3>Tian Guan Ci Fu</h3>
-            </div>
-
-            {/* <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                </div>  */}
-          </div>
-        </div>
-
-        <div className="comic">
-          <img src={SwordKing} alt="SwordKing" />
-
-          <div className="contents">
-            <div className="contentsHeader">
-              <h3>Rebirth of Sword King</h3>
-            </div>
-
-            {/* <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                </div>  */}
-          </div>
-        </div>
-
-        <div className="comic">
-          <img src={NanoMachine} alt="NanoMachine" />
-
-          <div className="contents">
-            <div className="contentsHeader">
-              <h3>Nano Machine</h3>
-            </div>
-
-            {/* <div className="contentsInfo">
-                      <p>Author's Name</p>
-                      <p>Genre</p>
-                  </div> */}
-          </div>
-        </div>
-
-        <div className="comic">
-          <img src={SwordSage} alt="SwordSage" />
-
-          <div className="contents">
-            <div className="contentsHeader">
-              <h3>Heavenly Sword Sage's Grand Saga</h3>
-            </div>
-
-            {/* <div className="contentsInfo">
-                  <p>Author's Name</p>
-                  <p>Genre</p>
-              </div>               */}
-          </div>
-        </div>
+                      <div className="contents">
+                        <div className="contentsHeader">
+                          <h3>{popularComic.comicName}</h3>
+                        </div>          
+                      </div>
+                    </div>
+                  </Link>
+              ))
+          }      
       </div>
     </div>
   );
 };
 
-const LastRead = () => {
-  return (
-    <div className="lastRead">
-      <div className="secondHeader">
-        <h1>Your History</h1>
-      </div>
 
-      <div className="historyContent">
-        <div className="history">
-          <img
-            src={SwordSage}
-            alt="Heavenly Sword Sage's Grand Saga"
-            id="historyCover"
-          />
-
-          <div className="historyInfo">
-            <h3>Heavenly Sword Sage's Grand Saga</h3>
-            <p>Chapter 17</p>
-            <p>Chapter 16</p>
-            <p>Chapter 15</p>
-          </div>
-        </div>
-
-        <div className="history">
-          <img src={NanoMachine} alt="historyCover" id="historyCover" />
-
-          <div className="historyInfo">
-            <h3>Nano Machine</h3>
-            <p>Chapter 118</p>
-            <p>Chapter 117</p>
-            <p>Chapter 116</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default HomePage;

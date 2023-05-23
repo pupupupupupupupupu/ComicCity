@@ -1,17 +1,18 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./comics.css";
-// import Navbar from "./navbar";
-// import Footer from "./footer";
 import SwordKing from "../extras/SwordKing.png";
 import Template from "./comicTemplate/template";
 
 const Comics = () => {
   const [comics, setComics] = useState(null);
+  const [selectedComic, setSelectedComic] = useState(null);
 
   useEffect(() => {
-    console.log("hi");
     const fetchComics = async () => {
-      const response = await fetch("/api/comics");
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/comics`);
+      console.log("test", response);
       const json = await response.json();
 
       if (response.ok) {
@@ -22,28 +23,15 @@ const Comics = () => {
     fetchComics();
   }, []);
 
+  const handleComicClick = (comic) => {
+    setSelectedComic(comic);
+  };
+
   return (
-    <>
-      {/* <Navbar /> */}
       <div className="comicsPage">
         <div className="comicsSection">
           <div className="comicsHeading">
             <h1>Comics</h1>
-          </div>
-
-          <div className="comicsGenre">
-            {/* <div className="genreHeader"><h2>Genre</h2></div> */}
-
-            <div className="genreParent">
-              <div className="genreChildren">Action</div>
-              <div className="genreChildren">Adventure</div>
-              <div className="genreChildren">Romance</div>
-              <div className="genreChildren">Slice of Life</div>
-            </div>
-
-            <div id="line">
-              <hr />
-            </div>
           </div>
 
           <div className="comicsContainer">
@@ -55,88 +43,21 @@ const Comics = () => {
               <div className="container">
                 {comics &&
                   comics.map((comic) => (
-                    <Template key={comic._id} comic={comic} />
+                    <div
+                      key={comic._id}
+                      className="container"
+                      onClick={() => handleComicClick(comic)}
+                    >
+                      <Link to={`/comics/${comic._id}`} state={comic}>
+                        <Template key={comic._id} comic={comic} />
+                      </Link>
+                    </div>
                   ))}
-                {/* <h5 key={comic._id}>{comic.comicName}</h5>
-                <img src={SwordKing} alt="SwordKing" />
-
-                <div className="containerContents">
-                  <div className="containerTitle"></div>
-
-                  <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                  </div>
-                </div> */}
               </div>
-
-              {/* <div className="container">
-                <img src={SwordKing} alt="SwordKing" />
-
-                <div className="containerContents">
-                  <div className="containerTitle">
-                    <h5>Rebirth of Sword King</h5>
-                  </div>
-
-                  <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* <div className="container">
-                <img src={SwordKing} alt="SwordKing" />
-
-                <div className="containerContents">
-                  <div className="containerTitle">
-                    <h5>Rebirth of Sword King</h5>
-                  </div>
-
-                  <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* <div className="container">
-                <img src={SwordKing} alt="SwordKing" />
-
-                <div className="containerContents">
-                  <div className="containerTitle">
-                    <h5>Rebirth of Sword King</h5>
-                  </div>
-
-                  <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* <div className="container">
-                <img src={SwordKing} alt="SwordKing" />
-
-                <div className="containerContents">
-                  <div className="containerTitle">
-                    <h5>Rebirth of Sword King</h5>
-                  </div>
-
-                  <div className="contentsInfo">
-                    <p>Author's Name</p>
-                    <p>Genre</p>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
       </div>
-      {/* <footer>
-        <Footer />
-      </footer> */}
-    </>
   );
 };
 
