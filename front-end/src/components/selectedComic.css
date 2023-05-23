@@ -1,0 +1,43 @@
+.comicDetailContainer{
+    transform: translateY(150px);
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+
+.detailsPage{
+    width: 70vw;
+    display: flex;
+}
+
+.coverContainer {
+    margin-right: 15px;
+}
+
+.coverContainer img{
+    width: 189px;
+    height: 267px;;
+}
+
+.detailContainer{
+    margin-left: 10px;
+}
+
+.buttons{
+    display: flex;
+}
+
+.seperateButton {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .seperateButton:hover {
+    background-color: #45a049;
+  }
+  

@@ -1,21 +1,17 @@
-const Template = ({comic}) => {
-//    const comic = props.data;
-//    console.log(comic)
-   
-    return (
-        <>
+const Template = ({ comic }) => {
+  //    const comic = props.data;
+  //    console.log(comic)
 
-            <h5>{comic.comicName}</h5>
-            <img src={comic.coverImage} alt="SwordKing" />
-            <div className="containerContents">
-                <div className="containerTitle"></div>
-                <div className="contentsInfo">
-                    <p>{comic.comicName}</p>
-                    <p>{comic.genre}</p>
-                </div>
-            </div>
-        </>
-    )
-} 
+  return (
+    <>
+      <div>
+        <img src={comic.coverImage} alt="coverImage" id="coverImage"/>
+      </div>
+      <h5 id="comicName">{comic.comicName}</h5>
+      <p>{comic.chapterNumber}</p>
+      <p>{comic.genre}</p>
+    </>
+  );
+};
 
-export default Template
+export default Template;

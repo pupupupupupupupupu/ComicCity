@@ -12,7 +12,7 @@ const Footer = () => {
       <img src={footerLogo} alt="footerLogo" id="footerLogo" />
 
       <div className="horizontalRule">
-        <hr />
+        <hr id="line"/>
       </div>
 
       <div className="footerContent">

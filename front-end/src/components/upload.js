@@ -1,294 +1,442 @@
-// import React, { useState } from 'react'
-
-// const Upload = () => {
-
-//     const [userRegistration, setUserRegistration] = useState({
-//         name: "",
-//         checkbox: ""
-//     });
-
-//     const [records, setRecords] = useState([]);
-
-//     const handleInput = (e) => {
-//         const name = e.target.name;
-//         const value = e.target.value;
-//         console.log(name, value);
-
-//         setUserRegistration({...userRegistration, [name] : value})
-//     };
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         // const name = e.target.name;
-//         // const value = e.target.value;
-
-//         const newRecord = { ...userRegistration,checkbox: e.target.checkbox.checked , id: new Date().getTime().toString() };
-
-//         setRecords({...records, newRecord});
-//         setUserRegistration({...userRegistration, name: "", checkbox:""})
-
-//         console.log(records);
-//     };
-
-//   return (
-//     <>
-//         <form className="formData" action="" onSubmit={handleSubmit}>
-//             <div>
-//                 <label htmlFor="name">Name</label>
-//                 <input type="text" autoComplete="off"
-
-//                 value={userRegistration.name}
-//                 onChange={handleInput}
-//                  name="name" id="name" />
-//             </div>
-//             <div>
-//                 <label htmlFor="checkbox">Checkbox</label>
-//                 <input type="checkbox"
-
-//                 value={userRegistration.checkbox}
-//                 onChange={handleInput}
-//                 name="checkbox" id="checkbox" />
-//             </div>
-
-//             <button type="submit">Submit</button>
-//         </form>
-//     </>
-//   )
-// }
-
-// export default Upload
-
-import React, { useState } from "react";
-import Navbar from "./navbar";
+import React, {  useState } from "react";
 import "./upload.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Upload = () => {
-  // const [userRegistration, setUserRegistration] = useState({
-  //     name: "",
-  //     checkbox: false
-  // });
+  const { user } = useAuth0();
+  const navigate = useNavigate();
+  const [comicData, setComicData] = useState({
+    coverImage: "",
+    comicName: "",
+    authorName: "",
+    chapterNumber: "",
+    genre: [],
+    comicImages: [],
+    description: "",
+    email: user && user.email,
+  });
+  const [error, setError] = useState(null);
 
-  // const [records, setRecords] = useState([]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // const handleInput = (e) => {
-  //     const name = e.target.name;
-  //     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-  //     setUserRegistration({...userRegistration, [name] : value});
-  //     console.log(name, value);
+    const response = await fetch(`${process.env.REACT_APP_URL}/api/comics`, {
+      method: "POST",
+      body: JSON.stringify(comicData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  // };
+    const json = await response.json();
 
-  // const handleSubmit = (e) => {
-  //     e.preventDefault();
+    if (!response.ok) {
+      setError(json.error);
+    }
 
-  //     const newRecord = { ...userRegistration, id: new Date().getTime().toString() };
-  //     setRecords([...records, newRecord]);
+    if (response.ok) {
+      setComicData({
+        ...comicData,
+        coverImage: "",
+        comicName: "",
+        authorName: "",
+        chapterNumber: "",
+        description: "",
+      });
+      navigate("/comics", { replace: true });
+      console.log("New comic added:", json);
+    }
+  };
 
-  //     console.log(records);
 
-  //     setUserRegistration({...userRegistration, name: "", checkbox: false});
-  // };
+
+
+  const convertToBase64 = (e) => {
+    const image = e.target.files[0];
+    
+    if (image.size > 5000000) {
+      alert("Image should be less than 5MB");
+      return;
+    }
+  
+    let reader = new FileReader();
+    
+    reader.readAsDataURL(image);
+    
+    reader.onload = () => {
+      console.log(reader.result);
+      const base64Image = reader.result;
+      setComicData((comicData) => ({
+        ...comicData,
+        comicImages: [...comicData.comicImages, base64Image],
+        coverImage: base64Image,
+      }));
+    };
+    
+    reader.onerror = (error) => {
+      console.log("Error: ", error);
+    };
+  };
+  
 
   return (
-    <>
-      {/* <Navbar/> */}
-      <form className="formData">
-        <div className="uploadForm">
-            <div className="leftContainer">
-                <div className="coverContainer">
-                  <label> Comic's cover image
-                    <input type="file" />
-                  </label>
-                </div>
-            </div>
-
-            <div className="rightContainer">
-
-                <div className="comicNameContainer">
-                  <label> Comic's Name &nbsp; &nbsp;</label>
-                  <input type="text" name="comicName" />
-                </div>
-
-                <div className="authorNameContainer">
-                  <label> Authors's Name &nbsp;</label>
-                  <input type="text" name="authorName" />
-                </div>
-
-                <div className="checkboxes">
-                  <div>
-                    <input type="checkbox" name="genre" value="Action" />
-                    <label htmlFor=""> Action &nbsp;</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" name="genre" value="Adventure" />
-                    <label htmlFor=""> Adventure &nbsp;</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" name="genre" value="Slice of Life" />
-                    <label htmlFor=""> Slice of Life &nbsp;</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" name="genre" value="Comedy" />
-                    <label htmlFor=""> Comedy &nbsp;</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" name="genre" value="Xinxia" />
-                    <label htmlFor=""> Xinxia &nbsp;</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" name="genre" value="Murim" />
-                    <label htmlFor=""> Murim &nbsp;</label>
-                  </div>          
-                </div>   
-
-                <div className="coverContainer">
-                  <div>
-                    <label> Chapter Image 1
-                      <input type="file" />
-                    </label>
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 2  
-                      <input type="file" />
-                    </label>              
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 3
-                      <input type="file" />
-                    </label> 
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 4
-                       <input type="file" />
-                    </label>
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 5
-                      <input type="file" />
-                    </label>
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 6
-                      <input type="file" />
-                    </label>
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 7
-                      <input type="file" />
-                    </label>
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 8
-                      <input type="file" />
-                    </label>
-                  </div>
-
-                  <div>
-                    <label> Chapter Image 9
-                      <input type="file" />
-                    </label>
-                  </div>
-                </div>     
-
-                <div className="comicNameContainer">
-                  <label> Chapter Number &nbsp; &nbsp;</label>
-                  <input type="number" name="chapterNumber" />
-                </div>
-
-                <div className="submitButton">
-                  <input type="submit" />
-                </div>  
-
-            </div>
+    <div className="uploadForm">
+      <div className="uploadHeader"><h1>Upload</h1></div>
+      <form className="formData" onSubmit={handleSubmit}>
+        <div className="leftContainer">
+          <div className="coverContainer">
+            <label className="inputContainer">
+              Comic's cover image
+              <input
+                type="file"
+                accept="image/*"
+                onChange={convertToBase64}
+                className="inputCSS"
+              />
+            </label>
+            {/* {comicData.coverImage ?             
+              <img
+                  style={{ height: "60px", width: "80px" }}
+                  alt="coverImage"
+                  src={comicData.coverImage}
+                /> : null} */}
+          </div>
         </div>
-        {/* onSubmit={handleSubmit} */}
-        {/* <div>
-                <label htmlFor="name">Name</label>
-                <input type="text" autoComplete="off"
-                    value={userRegistration.name}
-                    onChange={handleInput}
-                    name="name" id="name" />
-            </div>
+
+        <div className="rightContainer">
+          <div className="comicNameContainer">
+            <label> Comic's Name &nbsp; &nbsp;</label>
+            <input
+              type="text"
+              name="comicName"
+              onChange={(e) =>
+                setComicData({ ...comicData, comicName: e.target.value })
+              }
+              value={comicData.comicName}
+            />
+          </div>
+
+          <div className="authorNameContainer">
+            <label> Authors's Name </label>
+            <input
+              type="text"
+              name="authorName"
+              onChange={(e) =>
+                setComicData({ ...comicData, authorName: e.target.value })
+              }
+              value={comicData.authorName}
+            />
+          </div>
+
+          <div className="checkboxes">
             <div>
-                <label htmlFor="checkbox">Checkbox</label>
-                <input type="checkbox" 
-                    checked={userRegistration.checkbox}
-                    onChange={handleInput}
-                    name="checkbox" id="checkbox" />
+              <input
+                type="checkbox"
+                name="genre"
+                value="Action "
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const checked = e.target.checked;
+                  console.log(value, checked);
+                  if (checked) {
+                    setComicData({
+                      ...comicData,
+                      genre: [...comicData.genre, value],
+                    });
+                  } else {
+                    setComicData((comicData) => ({
+                      ...comicData,
+                      genre: comicData.genre.filter((e) => e !== value),
+                    }));
+                  }
+                }}
+              />
+              <label> Action &nbsp;</label>
             </div>
 
-            <button type="submit">Submit</button> */}
+            <div>
+              <input
+                type="checkbox"
+                name="genre"
+                value="Adventure "
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const checked = e.target.checked;
+                  console.log(value, checked);
+                  if (checked) {
+                    setComicData({
+                      ...comicData,
+                      genre: [...comicData.genre, value],
+                    });
+                  } else {
+                    setComicData((comicData) => ({
+                      ...comicData,
+                      genre: comicData.genre.filter((e) => e !== value),
+                    }));
+                  }
+                }}
+              />
+              <label> Adventure &nbsp;</label>
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="genre"
+                value="System "
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const checked = e.target.checked;
+                  console.log(value, checked);
+                  if (checked) {
+                    setComicData({
+                      ...comicData,
+                      genre: [...comicData.genre, value],
+                    });
+                  } else {
+                    setComicData((comicData) => ({
+                      ...comicData,
+                      genre: comicData.genre.filter((e) => e !== value),
+                    }));
+                  }
+                }}
+              />
+              <label> System &nbsp;</label>
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="genre"
+                value="Comedy "
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const checked = e.target.checked;
+                  console.log(value, checked);
+                  if (checked) {
+                    setComicData({
+                      ...comicData,
+                      genre: [...comicData.genre, value],
+                    });
+                  } else {
+                    setComicData((comicData) => ({
+                      ...comicData,
+                      genre: comicData.genre.filter((e) => e !== value),
+                    }));
+                  }
+                }}
+              />
+              <label> Comedy &nbsp;</label>
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="genre"
+                value="Xinxia "
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const checked = e.target.checked;
+                  console.log(value, checked);
+                  if (checked) {
+                    setComicData({
+                      ...comicData,
+                      genre: [...comicData.genre, value],
+                    });
+                  } else {
+                    setComicData((comicData) => ({
+                      ...comicData,
+                      genre: comicData.genre.filter((e) => e !== value),
+                    }));
+                  }
+                }}
+              />
+              <label> Xinxia &nbsp;</label>
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="genre"
+                value="Murim"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const checked = e.target.checked;
+                  console.log(value, checked);
+                  if (checked) {
+                    setComicData({
+                      ...comicData,
+                      genre: [...comicData.genre, value],
+                    });
+                  } else {
+                    setComicData((comicData) => ({
+                      ...comicData,
+                      genre: comicData.genre.filter((e) => e !== value),
+                    }));
+                  }
+                }}
+              />
+              <label> Murim &nbsp;</label>
+            </div>
+          </div>
+
+          <div className="coverContainer">
+            <div>
+              <label className="inputContainer">
+                Chapter Image 1
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={convertToBase64}
+                  className="inputCSS"
+                />
+              </label>
+              {comicData.comicImages[0] ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
+                  alt="firstPage"
+                  src={comicData.comicImages[0]}
+                  className="previewImg"
+                /> : null
+              }
+            </div>
+
+            <div>
+              <label className="inputContainer">
+                Chapter Image 2
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={convertToBase64}
+                  className="inputCSS"
+                />
+              </label>
+              {comicData.comicImages[1] ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
+                  alt="secondPage"
+                  src={comicData.comicImages[1]}
+                  className="previewImg"
+                /> : null
+              }
+            </div>
+
+            <div>
+              <label className="inputContainer">
+                Chapter Image 3
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={convertToBase64}
+                  className="inputCSS"
+                />
+              </label>
+              {comicData.comicImages[2] ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
+                  alt="thirdPage"
+                  src={comicData.comicImages[2]}
+                  className="previewImg"
+                /> : null
+              }
+            </div>
+
+            <div>
+              <label className="inputContainer">
+                Chapter Image 4
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={convertToBase64}
+                  className="inputCSS"
+                />
+              </label>
+              {comicData.comicImages[3] ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
+                  alt="fourthPage"
+                  src={comicData.comicImages[3]}
+                  className="previewImg"
+                /> : null
+              }
+            </div>
+
+            <div>
+              <label className="inputContainer">
+                Chapter Image 5
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={convertToBase64}
+                  className="inputCSS"
+                />
+              </label>
+              {comicData.comicImages[4] ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
+                  alt="fifthPage"
+                  src={comicData.comicImages[4]}
+                  className="previewImg"
+                /> : null
+              }            
+            </div>
+
+            <div>
+              <label className="inputContainer">
+                Chapter Image 6
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={convertToBase64}
+                  className="inputCSS"
+                />
+              </label>
+              {comicData.comicImages[5] ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
+                  alt="sixthPage"
+                  src={comicData.comicImages[5]}
+                  className="previewImg"
+                /> : null
+              }     
+            </div>
+          </div>
+
+          <div className="comicChapterContainer">
+            <label> Chapter Number: &nbsp; </label>
+            <input
+              type="number"
+              name="chapterNumber"
+              onChange={(e) =>
+                setComicData({ ...comicData, chapterNumber: e.target.value })
+              }
+              value={comicData.chapterNumber}
+            />
+            <br />
+            <br />
+          </div>
+
+          <div className="comicDescriptionContainer">
+            <label> Synopsis : &nbsp; </label>
+            <textarea
+              name="description"
+              rows="5"
+              cols="50"
+              onChange={(e) =>
+                setComicData({ ...comicData, description: e.target.value })
+              }
+              value={comicData.description}
+            />
+          </div>
+
+          <button className="submitButton">Submit</button>
+
+
+        </div>      
       </form>
-    </>
+    </div>
   );
 };
 
 export default Upload;
-
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// const Upload = () => {
-
-//   const [userRegistration, setUserRegistration] = useState({
-//     name: "",
-//     checkbox: false
-//   });
-
-//   const handleInput = (e) => {
-//     const name = e.target.name;
-//     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-//     setUserRegistration({...userRegistration, [name] : value});
-//     console.log(name, value);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     axios.post('/api/comics', userRegistration)
-//       .then(response => {
-//         console.log(response);
-//         setUserRegistration({...userRegistration, name: "", checkbox: false});
-//       })
-//       .catch(error => {
-//         console.log(error);
-//       });
-//   };
-
-//   return (
-//     <>
-//       <form className="formData" action="" onSubmit={handleSubmit}>
-//         <div>
-//           <label htmlFor="name">Name</label>
-//           <input type="text" autoComplete="off"
-//             value={userRegistration.name}
-//             onChange={handleInput}
-//             name="name" id="name" />
-//         </div>
-//         <div>
-//           <label htmlFor="checkbox">Checkbox</label>
-//           <input type="checkbox"
-//             checked={userRegistration.checkbox}
-//             onChange={handleInput}
-//             name="checkbox" id="checkbox" />
-//         </div>
-
-//         <button type="submit">Submit</button>
-//       </form>
-//     </>
-//   )
-// }
-
-// export default Upload;

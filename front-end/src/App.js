@@ -7,7 +7,10 @@ import Comics from "./components/comics";
 import Upload from "./components/upload";
 import AboutUs from "./components/aboutUs";
 import Navbar from "./components/navbar";
-import Footer from './components/footer'
+import Details from "./components/selectedComic";
+import ReadComic from "./components/readComic";
+import Footer from "./components/footer";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   return (
@@ -18,13 +21,15 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/comics" element={<Comics />} />
+            <Route path="/comics/:id" element={<Details />} />
+            <Route path="/comics/:id/:comicName" element={<ReadComic />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/aboutus" element={<AboutUs />} />
           </Routes>
         </div>
-        {/* <footer>
+        <footer>
            <Footer />
-        </footer> */}
+        </footer>
       </BrowserRouter>
     </div>
   );

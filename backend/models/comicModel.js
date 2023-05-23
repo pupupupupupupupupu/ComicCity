@@ -1,39 +1,52 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const comicSchema = new Schema({
+const comicSchema = new Schema(
+  {
     coverImage: {
-        type: String
+      type: String,
+      // default:
+      //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMeeQAqpDFqC6VMZyabfwmQS-i-iMdYUXso6K7BY4CNw&usqp=CAU&ec=48665701",
     },
     comicName: {
-        type: String,
-        required: [true, "A nome for comic is required"]
+      type: String,
+      required: [true, "A nome for comic is required"],
     },
     authorName: {
-        type: String,
-        default: "Anonymous"
+      type: String,
+      default: "Anonymous",
     },
     genre: {
-        type: Array
+      type: Array,
     },
     comicImages: {
-        type: Array
+      type: Array,
     },
     chapterNumber: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     totalChapter: {
-        type: Number,
-        required: true,
-        validate: {
-            validator:  function(value) {
-                return value >= this.chapterNumber;
-            },
-            message: "Total chapter should be greater than or equal to chapter number"
+      type: Number,
+      required: false,
+      validate: {
+        validator: function (value) {
+          return value >= this.chapterNumber;
         },
-
+        message:
+          "Total chapter should be greater than or equal to chapter number",
+      },
     },
-}, {timestamps: true});
+    description: {
+      type: String,
+      required: [true, "A description is needed"],
+    },
+    email: {
+      type: String,
+      unique: false,
+    },
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Comic", comicSchema);
