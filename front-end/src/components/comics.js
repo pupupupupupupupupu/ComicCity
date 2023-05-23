@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./comics.css";
-import Navbar from "./navbar";
-import Footer from "./footer";
+// import Navbar from "./navbar";
+// import Footer from "./footer";
 import SwordKing from "../extras/SwordKing.png";
+import Template from "./comicTemplate/template";
 
-const comics = () => {
+const Comics = () => {
+  const [comics, setComics] = useState(null);
+
+  useEffect(() => {
+    const fetchComics = async () => {
+      const response = await fetch("/api/comics");
+      const json = await response.json();
+
+      if (response.ok) {
+        setComics(json);
+      }
+    };
+
+    fetchComics();
+  }, []);
+
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="comicsPage">
         <div className="comicsSection">
           <div className="comicsHeading">
@@ -36,6 +52,23 @@ const comics = () => {
 
             <div className="mainContainer">
               <div className="container">
+                {comics && comics.map((comic) => (
+                  <Template key={comic._id} comic={comic}/>
+                  ))}
+                {/* <h5 key={comic._id}>{comic.comicName}</h5>
+                <img src={SwordKing} alt="SwordKing" />
+
+                <div className="containerContents">
+                  <div className="containerTitle"></div>
+
+                  <div className="contentsInfo">
+                    <p>Author's Name</p>
+                    <p>Genre</p>
+                  </div>
+                </div> */}
+              </div>
+
+              {/* <div className="container">
                 <img src={SwordKing} alt="SwordKing" />
 
                 <div className="containerContents">
@@ -44,13 +77,13 @@ const comics = () => {
                   </div>
 
                   <div className="contentsInfo">
-                    {/* <p>Author's Name</p> */}
+                    <p>Author's Name</p>
                     <p>Genre</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="container">
+              {/* <div className="container">
                 <img src={SwordKing} alt="SwordKing" />
 
                 <div className="containerContents">
@@ -59,13 +92,13 @@ const comics = () => {
                   </div>
 
                   <div className="contentsInfo">
-                    {/* <p>Author's Name</p> */}
+                    <p>Author's Name</p>
                     <p>Genre</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="container">
+              {/* <div className="container">
                 <img src={SwordKing} alt="SwordKing" />
 
                 <div className="containerContents">
@@ -74,13 +107,13 @@ const comics = () => {
                   </div>
 
                   <div className="contentsInfo">
-                    {/* <p>Author's Name</p> */}
+                    <p>Author's Name</p>
                     <p>Genre</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="container">
+              {/* <div className="container">
                 <img src={SwordKing} alt="SwordKing" />
 
                 <div className="containerContents">
@@ -89,34 +122,20 @@ const comics = () => {
                   </div>
 
                   <div className="contentsInfo">
-                    {/* <p>Author's Name</p> */}
+                    <p>Author's Name</p>
                     <p>Genre</p>
                   </div>
                 </div>
-              </div>
-              <div className="container">
-                <img src={SwordKing} alt="SwordKing" />
-
-                <div className="containerContents">
-                  <div className="containerTitle">
-                    <h5>Rebirth of Sword King</h5>
-                  </div>
-
-                  <div className="contentsInfo">
-                    {/* <p>Author's Name</p> */}
-                    <p>Genre</p>
-                  </div>
-                </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
-      <footer>
+      {/* <footer>
         <Footer />
-      </footer>
+      </footer> */}
     </>
   );
 };
 
-export default comics;
+export default Comics;

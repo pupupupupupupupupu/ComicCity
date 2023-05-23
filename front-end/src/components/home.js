@@ -29,7 +29,7 @@ import "swiper/css/effect-coverflow";
 function HomePage() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="App">
         <div id="navbar">
           <div id="logoContainer"></div>
@@ -46,9 +46,9 @@ function HomePage() {
         </div>
       </div>
 
-      <footer>
+      {/* <footer>
         <Footer />
-      </footer>
+      </footer> */}
     </>
   );
 }
