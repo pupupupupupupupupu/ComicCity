@@ -9,6 +9,7 @@ const Comics = () => {
   const [comics, setComics] = useState(null);
 
   useEffect(() => {
+    console.log("hi");
     const fetchComics = async () => {
       const response = await fetch("/api/comics");
       const json = await response.json();
@@ -52,8 +53,9 @@ const Comics = () => {
 
             <div className="mainContainer">
               <div className="container">
-                {comics && comics.map((comic) => (
-                  <Template key={comic._id} comic={comic}/>
+                {comics &&
+                  comics.map((comic) => (
+                    <Template key={comic._id} comic={comic} />
                   ))}
                 {/* <h5 key={comic._id}>{comic.comicName}</h5>
                 <img src={SwordKing} alt="SwordKing" />
