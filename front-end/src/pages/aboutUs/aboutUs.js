@@ -1,6 +1,6 @@
 import React from "react";
 import "./aboutUs.css";
-import AboutUsLogo from "../extras/ComicCityAboutUs.png";
+import AboutUsLogo from "../../extras/ComicCityAboutUs.png"
 
 const AboutUs = () => {
   return (
