@@ -1,10 +1,10 @@
 import "./navbar.css";
-import Logo from "../extras/Comic City.png";
+import Logo from "../../extras/Comic City.png";
 import * as React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Search from "./Search/search";
+import Search from "../Search/search";
 
 const Navbar = () => {
   const navigate = useNavigate();

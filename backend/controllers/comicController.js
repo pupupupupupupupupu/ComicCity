@@ -3,11 +3,23 @@ const mongoose = require("mongoose");
 const cloudinary = require("../cloudinary/cloudinary.js");
 
 // get all comic
-const getComics = async (req, res) => {
-  const comics = await Comic.find({}).sort({ createdAt: -1 });
+// const getComics = async (req, res) => {
+//   const comics = await Comic.find({}).sort({ createdAt: -1 });
+//   console.log(comics);
+//   res.status(200).json(comics);
+// };
 
-  res.status(200).json(comics);
+const getComics = async (req, res) => {
+  try {
+    const comics = await Comic.find({}).sort({ createdAt: -1 });
+    console.log(comics);    
+    const comicsWithoutImages = comics.map(({ comicImages, ...rest }) => rest);
+    res.status(200).json(comicsWithoutImages);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
+
 
 // get a single comic
 const getComic = async (req, res) => {

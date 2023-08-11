@@ -4,16 +4,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // components
 import HomePage from "./pages/home/home";
 import Comics from "./pages/comics/comics";
-import Upload from "./components/upload";
+import Upload from "./components/upload/upload";
 import AboutUs from "./pages/aboutUs/aboutUs";
-import Navbar from "./components/navbar";
+import Navbar from "./components/navbar/navbar";
 import Details from "./pages/selectedComic/selectedComic";
 import ReadComic from "./pages/readComic/readComic";
-import Footer from "./components/footer";
+import Footer from "./components/footer/footer";
+import { AppProvider } from './Context';
 
 function App() {
   return (
     <div className="App">
+      <AppProvider>
       <BrowserRouter>
         <Navbar />
         <div className="components">
@@ -30,6 +32,7 @@ function App() {
           <Footer />
         </footer>
       </BrowserRouter>
+      </AppProvider>
     </div>
   );
 }
