@@ -16,7 +16,7 @@ const Upload = () => {
     description: "",
     email: user && user.email,
   });
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +52,32 @@ const Upload = () => {
 
 
 
+  const convertToBase64cover = (e) => {
+    const image = e.target.files[0];
+    
+    if (image.size > 5000000) {
+      alert("Image should be less than 5MB");
+      return;
+    }
+  
+    let reader = new FileReader();
+    
+    reader.readAsDataURL(image);
+    
+    reader.onload = () => {
+      console.log(reader.result);
+      const base64Image = reader.result;
+      setComicData((comicData) => ({
+        ...comicData,
+        // comicImages: [...comicData.comicImages, base64Image],
+        coverImage: base64Image,
+      }));
+    };
+    
+    reader.onerror = (error) => {
+      console.log("Error: ", error);
+    };
+  };
   const convertToBase64 = (e) => {
     const image = e.target.files[0];
     
@@ -70,7 +96,8 @@ const Upload = () => {
       setComicData((comicData) => ({
         ...comicData,
         comicImages: [...comicData.comicImages, base64Image],
-        coverImage: base64Image,
+        // coverImage: base64Image,
+        // {public_id: "", url: base64Image}
       }));
     };
     
@@ -91,16 +118,18 @@ const Upload = () => {
               <input
                 type="file"
                 accept="image/*"
-                onChange={convertToBase64}
+                onChange={convertToBase64cover}
                 className="inputCSS"
               />
             </label>
-            {/* {comicData.coverImage ?             
-              <img
-                  style={{ height: "60px", width: "80px" }}
+              {comicData.coverImage ? 
+                  <img
+                  style={{ height: "40px", width: "40px" }}
                   alt="coverImage"
                   src={comicData.coverImage}
-                /> : null} */}
+                  className="previewImg"
+                /> : null
+              }
           </div>
         </div>
 

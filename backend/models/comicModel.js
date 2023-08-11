@@ -4,9 +4,17 @@ const Schema = mongoose.Schema;
 const comicSchema = new Schema(
   {
     coverImage: {
-      type: String,
+      // type: String,
       // default:
       //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMeeQAqpDFqC6VMZyabfwmQS-i-iMdYUXso6K7BY4CNw&usqp=CAU&ec=48665701",
+      public_id: {
+        type: String,
+        required: true
+      },
+      url: {
+        type: String,
+        required: true
+      }
     },
     comicName: {
       type: String,
@@ -21,6 +29,14 @@ const comicSchema = new Schema(
     },
     comicImages: {
       type: Array,
+      // public_id: {
+      //   type: Array,
+      //   required: true
+      // },
+      // url: {
+      //   type: Array,
+      //   required: true
+      // }
     },
     chapterNumber: {
       type: Number,

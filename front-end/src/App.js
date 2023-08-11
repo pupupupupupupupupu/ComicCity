@@ -2,15 +2,14 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // components
-import HomePage from "./components/home";
-import Comics from "./components/comics";
+import HomePage from "./pages/home/home";
+import Comics from "./pages/comics/comics";
 import Upload from "./components/upload";
-import AboutUs from "./components/aboutUs";
+import AboutUs from "./pages/aboutUs/aboutUs";
 import Navbar from "./components/navbar";
-import Details from "./components/selectedComic";
-import ReadComic from "./components/readComic";
+import Details from "./pages/selectedComic/selectedComic";
+import ReadComic from "./pages/readComic/readComic";
 import Footer from "./components/footer";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   return (
@@ -28,7 +27,7 @@ function App() {
           </Routes>
         </div>
         <footer>
-           <Footer />
+          <Footer />
         </footer>
       </BrowserRouter>
     </div>

@@ -52,7 +52,7 @@ const Details = () => {
     <div className="comicDetailContainer">
       <div className="detailsPage">
         <div className="coverContainer">
-            <img src={selectedcomic.coverImage} alt={selectedcomic.comicName} />
+            <img src={selectedcomic.coverImage.url} alt={selectedcomic.comicName} />
         </div>
         <div className="detailContainer">
           {/* <div className="detailsImage"> */}

@@ -35,7 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../extras/backgroundCarousel.png");
+  background-image: url("../../extras/backgroundCarousel.png");
   height: 294.8px;
   width: 100%;
 }

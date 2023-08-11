@@ -5,7 +5,8 @@ const {
   getComic,
   createComic,
   deleteComic,
-  updateComic
+  updateComic,
+  search,
 } = require("../controllers/comicController");
 
 const router = express.Router();
@@ -24,5 +25,9 @@ router.delete("/:id", deleteComic);
 
 //UPDATE a single comic
 router.patch("/:id", updateComic);
+
+//Search route
+// router.get("/search/:name", search);
+router.get("/search/:query", search);
 
 module.exports = router;
