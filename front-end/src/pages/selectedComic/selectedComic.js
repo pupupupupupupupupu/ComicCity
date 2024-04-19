@@ -1,30 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./selectedComic.css";
 
 const Details = () => {
   const { id } = useParams();
   const [selectedcomic, setComic] = useState(null);
+  const { user } = useAuth0();
 
   const handleDelete = () => {
-    try {
-      const response = fetch(`${process.env.REACT_APP_URL}/api/comics/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    if (selectedcomic.email === user.email) {
+      try {
+        const response = fetch(`${process.env.REACT_APP_URL}/api/comics/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        // do something here if the delete operation was successful
+      } catch (error) {
+        console.error('Error deleting comic:', error);
       }
-  
-      // do something here if the delete operation was successful
-    } catch (error) {
-      console.error('Error deleting comic:', error);
+      console.log("Deleting");
+    } else {
+      console.log("You don't have the perission to delete this comci.");
     }
-    console.log("Deleting")
+
   };
   
     

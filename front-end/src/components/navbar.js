@@ -1,18 +1,23 @@
 import "./navbar.css";
 import Logo from "../extras/Comic City.png";
-import * as React from "react";
+import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Search from "./Search/search";
-
+import { useGlobalContext } from "../Context";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout, loginWithPopup } = useAuth0();
+  const { searchResults, setSearchResults } = useGlobalContext();
+  // console.log(user.email);
   // console.log(user);
   const handleClick = () => {
     if (user) {
-      window.open("/upload");
+      // navigate("/upload", { replace: false } );
+      console.log("aman");
+      window.open("/upload", "_self");
+
     } else {
       loginWithPopup().then(() => {
         navigate("/upload", { replace: true });
@@ -21,9 +26,9 @@ const Navbar = () => {
   };
 
   const base_url = `${process.env.REACT_APP_URL}/api/comics`;
-  const [obj, setObj] = React.useState({});
-  const [search, setSearch] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
+  const [obj, setObj] = useState({});
+  const [search, setSearch] = useState("");
+  // const [searchResults, setSearchResults] = useState([]);
 
   // React.useEffect(() => {
   const doSearch = async (searchText) => {
@@ -34,13 +39,14 @@ const Navbar = () => {
       console.log(url);
       // const data = await axios.get(url);
       const response = await axios.get(url);
-      console.log(response)
+      console.log(response);
       // setObj(response.data.data);
       const data = response.data.data;
       setObj(data);
       setSearchResults(data);
       // setData(data);
       console.log(data);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -106,14 +112,14 @@ const Navbar = () => {
         </div>
       </header>
 
-          {/* Display search results */}
-     {/* <div className="searchResults">
+      {/* Display search results */}
+      {/* <div className="searchResults">
         {searchResults.map((comic) => (
           <div key={comic._id}>
             <h2>{comic.comicName}</h2> */}
-            {/* <p>{comic.description}</p> */}
-            {/* Display other relevant information */}
-          {/* </div>
+      {/* <p>{comic.description}</p> */}
+      {/* Display other relevant information */}
+      {/* </div>
         ))}
       </div> */}
     </div>

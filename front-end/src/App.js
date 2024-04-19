@@ -10,10 +10,12 @@ import Navbar from "./components/navbar";
 import Details from "./pages/selectedComic/selectedComic";
 import ReadComic from "./pages/readComic/readComic";
 import Footer from "./components/footer";
+import { AppProvider } from "./Context";
 
 function App() {
   return (
     <div className="App">
+      <AppProvider>
       <BrowserRouter>
         <Navbar />
         <div className="components">
@@ -30,6 +32,7 @@ function App() {
           <Footer />
         </footer>
       </BrowserRouter>
+      </AppProvider>
     </div>
   );
 }

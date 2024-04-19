@@ -59,7 +59,6 @@ const comicSchema = new Schema(
     },
     email: {
       type: String,
-      unique: false,
     },
   },
   { timestamps: true }

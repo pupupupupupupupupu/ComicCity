@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./upload.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -43,27 +43,25 @@ const Upload = () => {
         authorName: "",
         chapterNumber: "",
         description: "",
+        email: user.email,
       });
       navigate("/comics", { replace: true });
       console.log("New comic added:", json);
     }
   };
 
-
-
-
   const convertToBase64cover = (e) => {
     const image = e.target.files[0];
-    
+
     if (image.size > 5000000) {
       alert("Image should be less than 5MB");
       return;
     }
-  
+
     let reader = new FileReader();
-    
+
     reader.readAsDataURL(image);
-    
+
     reader.onload = () => {
       console.log(reader.result);
       const base64Image = reader.result;
@@ -73,23 +71,23 @@ const Upload = () => {
         coverImage: base64Image,
       }));
     };
-    
+
     reader.onerror = (error) => {
       console.log("Error: ", error);
     };
   };
   const convertToBase64 = (e) => {
     const image = e.target.files[0];
-    
+
     if (image.size > 5000000) {
       alert("Image should be less than 5MB");
       return;
     }
-  
+
     let reader = new FileReader();
-    
+
     reader.readAsDataURL(image);
-    
+
     reader.onload = () => {
       console.log(reader.result);
       const base64Image = reader.result;
@@ -100,16 +98,17 @@ const Upload = () => {
         // {public_id: "", url: base64Image}
       }));
     };
-    
+
     reader.onerror = (error) => {
       console.log("Error: ", error);
     };
   };
-  
 
   return (
     <div className="uploadForm">
-      <div className="uploadHeader"><h1>Upload</h1></div>
+      <div className="uploadHeader">
+        <h1>Upload</h1>
+      </div>
       <form className="formData" onSubmit={handleSubmit}>
         <div className="leftContainer">
           <div className="coverContainer">
@@ -122,14 +121,14 @@ const Upload = () => {
                 className="inputCSS"
               />
             </label>
-              {comicData.coverImage ? 
-                  <img
-                  style={{ height: "40px", width: "40px" }}
-                  alt="coverImage"
-                  src={comicData.coverImage}
-                  className="previewImg"
-                /> : null
-              }
+            {comicData.coverImage ? (
+              <img
+                style={{ height: "40px", width: "40px" }}
+                alt="coverImage"
+                src={comicData.coverImage}
+                className="previewImg"
+              />
+            ) : null}
           </div>
         </div>
 
@@ -321,14 +320,14 @@ const Upload = () => {
                   className="inputCSS"
                 />
               </label>
-              {comicData.comicImages[0] ? 
-                  <img
+              {comicData.comicImages[0] ? (
+                <img
                   style={{ height: "40px", width: "40px" }}
                   alt="firstPage"
                   src={comicData.comicImages[0]}
                   className="previewImg"
-                /> : null
-              }
+                />
+              ) : null}
             </div>
 
             <div>
@@ -341,14 +340,14 @@ const Upload = () => {
                   className="inputCSS"
                 />
               </label>
-              {comicData.comicImages[1] ? 
-                  <img
+              {comicData.comicImages[1] ? (
+                <img
                   style={{ height: "40px", width: "40px" }}
                   alt="secondPage"
                   src={comicData.comicImages[1]}
                   className="previewImg"
-                /> : null
-              }
+                />
+              ) : null}
             </div>
 
             <div>
@@ -361,14 +360,14 @@ const Upload = () => {
                   className="inputCSS"
                 />
               </label>
-              {comicData.comicImages[2] ? 
-                  <img
+              {comicData.comicImages[2] ? (
+                <img
                   style={{ height: "40px", width: "40px" }}
                   alt="thirdPage"
                   src={comicData.comicImages[2]}
                   className="previewImg"
-                /> : null
-              }
+                />
+              ) : null}
             </div>
 
             <div>
@@ -381,14 +380,14 @@ const Upload = () => {
                   className="inputCSS"
                 />
               </label>
-              {comicData.comicImages[3] ? 
-                  <img
+              {comicData.comicImages[3] ? (
+                <img
                   style={{ height: "40px", width: "40px" }}
                   alt="fourthPage"
                   src={comicData.comicImages[3]}
                   className="previewImg"
-                /> : null
-              }
+                />
+              ) : null}
             </div>
 
             <div>
@@ -401,14 +400,14 @@ const Upload = () => {
                   className="inputCSS"
                 />
               </label>
-              {comicData.comicImages[4] ? 
-                  <img
+              {comicData.comicImages[4] ? (
+                <img
                   style={{ height: "40px", width: "40px" }}
                   alt="fifthPage"
                   src={comicData.comicImages[4]}
                   className="previewImg"
-                /> : null
-              }            
+                />
+              ) : null}
             </div>
 
             <div>
@@ -421,14 +420,14 @@ const Upload = () => {
                   className="inputCSS"
                 />
               </label>
-              {comicData.comicImages[5] ? 
-                  <img
+              {comicData.comicImages[5] ? (
+                <img
                   style={{ height: "40px", width: "40px" }}
                   alt="sixthPage"
                   src={comicData.comicImages[5]}
                   className="previewImg"
-                /> : null
-              }     
+                />
+              ) : null}
             </div>
           </div>
 
@@ -460,9 +459,7 @@ const Upload = () => {
           </div>
 
           <button className="submitButton">Submit</button>
-
-
-        </div>      
+        </div>
       </form>
     </div>
   );

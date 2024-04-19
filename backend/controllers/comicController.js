@@ -127,6 +127,7 @@ try {
   const results = await Comic.find({
     $or: [
       { comicName: { $regex: query, $options: 'i'} },
+      { authorName: { $regex: query, $options: 'i'} },
     ],
     // comicName:queryRegexp
   });
