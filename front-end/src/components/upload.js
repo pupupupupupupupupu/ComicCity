@@ -131,6 +131,7 @@ const Upload = () => {
             ) : null}
           </div>
         </div>
+        
 
         <div className="rightContainer">
           <div className="comicNameContainer">
