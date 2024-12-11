@@ -13,11 +13,13 @@ const Navbar = () => {
   // console.log(user.email);
   // console.log(user);
   const handleClick = () => {
+    // navigate("upload")
     if (user) {
       // navigate("/upload", { replace: false } );
       console.log("aman");
-      window.open("/upload", "_self");
-
+      // window.open("/upload", "_self");
+      // navigate("/upload", { replace: true });
+      
     } else {
       loginWithPopup().then(() => {
         navigate("/upload", { replace: true });
