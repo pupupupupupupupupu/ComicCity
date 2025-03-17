@@ -121,7 +121,7 @@ const PopularComics = () => {
     };
 
     fetchComic();
-  });
+  }, []);
 
   if (!popular) {
     return <div>Loading...</div>;
