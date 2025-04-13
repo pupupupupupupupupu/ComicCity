@@ -1,22 +1,61 @@
 import "./navbar.css";
 import Logo from "../extras/Comic City.png";
-import * as React from "react";
+import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import Search from "./Search/search";
+import { useGlobalContext } from "../Context";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout, loginWithPopup } = useAuth0();
-  console.log(user);
+  const { searchResults, setSearchResults } = useGlobalContext();
+  // console.log(user.email);
+  // console.log(user);
   const handleClick = () => {
+    // navigate("upload")
     if (user) {
-      window.open("/upload");
+      // navigate("/upload", { replace: false } );
+      console.log("aman");
+      // window.open("/upload", "_self");
+      // navigate("/upload", { replace: true });
+      
     } else {
       loginWithPopup().then(() => {
         navigate("/upload", { replace: true });
       });
     }
   };
+
+  const base_url = `${process.env.REACT_APP_URL}/api/comics`;
+  const [obj, setObj] = useState({});
+  const [search, setSearch] = useState("");
+  // const [searchResults, setSearchResults] = useState([]);
+
+  // React.useEffect(() => {
+  const doSearch = async (searchText) => {
+    console.log(searchText);
+    try {
+      // const url = `${base_url}/search/name=${searchText}`;
+      const url = `${base_url}/search/${searchText}`;
+      console.log(url);
+      // const data = await axios.get(url);
+      const response = await axios.get(url);
+      console.log(response);
+      // setObj(response.data.data);
+      const data = response.data.data;
+      setObj(data);
+      setSearchResults(data);
+      // setData(data);
+      console.log(data);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // console.log(dataa);
+  // doSearch();
+  // }, [search, base_url]);
 
   return (
     <div className="navBody">
@@ -28,7 +67,12 @@ const Navbar = () => {
         </div>
         <ul className="navbar">
           <li>
-            <div>Search</div>
+            <div>
+              <Search
+                doSearch={doSearch}
+                setSearch={(search) => setSearch(search)}
+              />
+            </div>
           </li>
           <Link to="/">
             <li>
@@ -69,6 +113,17 @@ const Navbar = () => {
           </div>
         </div>
       </header>
+
+      {/* Display search results */}
+      {/* <div className="searchResults">
+        {searchResults.map((comic) => (
+          <div key={comic._id}>
+            <h2>{comic.comicName}</h2> */}
+      {/* <p>{comic.description}</p> */}
+      {/* Display other relevant information */}
+      {/* </div>
+        ))}
+      </div> */}
     </div>
   );
 };

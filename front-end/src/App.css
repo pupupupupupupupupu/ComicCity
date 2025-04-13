@@ -31,7 +31,6 @@
   height: 13px;
 }
 
-
 /* #navButton {
   position: relative;
   left: 10%;
@@ -108,7 +107,7 @@ SwiperSlide {
   align-items: center;
   transition: all 0.5s ease;
   /* padding: 0 5%; */
-  
+
   /* background-color: aqua; */
 }
 
@@ -127,7 +126,7 @@ SwiperSlide {
   flex-direction: column;
 }
 
-.comic img{
+.comic img {
   /* color: #fff; */
   color: #000;
   background-color: #000000;
@@ -225,6 +224,10 @@ SwiperSlide {
 footer {
   height: 30vh;
   background-color: #8284c2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 footer img {
@@ -239,15 +242,15 @@ footer img {
     align-items: center;
   }
 
-  .historyContent{
+  .historyContent {
     box-sizing: border-box;
     padding: 10%;
   }
 
-  .historyInfo h3{
+  .historyInfo h3 {
     font-size: 1.5rem;
   }
-  .historyInfo p{
+  .historyInfo p {
     font-size: 1.2rem;
   }
 }

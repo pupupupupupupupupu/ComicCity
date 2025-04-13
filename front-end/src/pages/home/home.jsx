@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import "./home.css";
-import marsRed from "../extras/marsRed.png";
-import blueMoon from "../extras/vampireBlue.png";
-import mushoku from "../extras/mushokuTensei.png";
-import noblesse from "../extras/Noblesse.png";
+import marsRed from "../../extras/marsRed.png";
+import blueMoon from "../../extras/vampireBlue.png";
+import mushoku from "../../extras/mushokuTensei.png";
+import noblesse from "../../extras/Noblesse.png";
+import { AppContext } from "../../Context";
 
 
 // import Swiper core and required modules
@@ -21,6 +22,7 @@ import "swiper/css/bundle";
 import "swiper/css/effect-coverflow";
 
 function HomePage() {
+  // const [searchResults, setSearchResults] = useState([]);
   return (
     <>
       <div className="App">
@@ -99,7 +101,10 @@ const Carousel = () => {
 
 const PopularComics = () => {
 
-  const { id } = useParams();
+  // Using Context
+  const { searchResults } = useContext(AppContext);
+
+  // const { id } = useParams();
   const [popular, setPopular] = useState(null);
 
   useEffect(() => {
@@ -109,14 +114,14 @@ const PopularComics = () => {
 
       if (response.ok) {
         setPopular(json);
-        console.log(json);
-        console.log("This is Comic Data:", popular);
+        // console.log(json);
+        // console.log("This is Comic Data:", popular);
         
       }
     };
 
     fetchComic();
-  });
+  }, []);
 
   if (!popular) {
     return <div>Loading...</div>;
@@ -124,25 +129,49 @@ const PopularComics = () => {
 
   return (
     <div className="popularComics">
+      {searchResults.length > 0 && (
+        <div>
+          <div className="header">
+             <h1 id="popular">Your Search Result</h1>
+          </div>
+
+          <div id="template">
+            {searchResults.map((popularComic) => (
+              <Link to={`/comics/${popularComic._id}`} key={popularComic._id}>
+               <div className="comic">
+               <img src={popularComic.coverImage.url} alt={popularComic.comicName} />
+
+                <div className="searchContents">
+                  {/* <div className="contentsHeader"> */}
+                  <h3>{popularComic.comicName}</h3>
+                  {/* </div> */}
+                </div>
+               </div>
+            </Link>
+            ))}      
+         </div>
+        </div>
+
+      )}
+
       <div className="header">
         <h1 id="popular">Popular This Week</h1>
       </div>
 
       <div id="template">
-          {popular.map((popularComic) => (
-                  <Link to={`/comics/${popularComic._id}`}>
-                    <div key={popularComic._id} className="comic">
-                      <img key={popularComic._id} src={popularComic.coverImage} alt={popularComic.comicName} />
+      {popular.map((popularComic) => (
+          <Link to={`/comics/${popularComic._id}`} key={popularComic._id}>
+            <div className="comic">
+              <img src={popularComic.coverImage.url} alt={popularComic.comicName} />
 
-                      <div className="contents">
-                        <div className="contentsHeader">
-                          <h3>{popularComic.comicName}</h3>
-                        </div>          
-                      </div>
-                    </div>
-                  </Link>
-              ))
-          }      
+              <div className="contents">
+                <div className="contentsHeader">
+                  <h3>{popularComic.comicName}</h3>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}      
       </div>
     </div>
   );
